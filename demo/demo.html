@@ -83,6 +83,16 @@
     </div>
 
     <br><br><br><br>
+    
+    <div class="row">
+      <div id="numero4" class="twelve columns" style="display: none;">
+        <h3>Hidden Element</h3>
+        <p>Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.</p>
+      </div>
+      <a href="#" class="toggle">Show Hidden Content</a>
+    </div>
+
+    <br><br><br><br>
 
 	</div>
 	    <!-- Tip Content -->
@@ -99,6 +109,10 @@
   	    <h2>Stop #3</h2>
         <p>Now what are you waiting for? Add this to your projects and get the most out of your apps!</p>
   	  </li>
+  	  <li data-id="numero4" data-text="Close">
+  	    <h2>Stop #4</h2>
+        <p>Now what are you waiting for? Add this to your projects and get the most out of your apps!</p>
+  	  </li>
   	</ol>
 
   	<!-- Run the plugin -->
@@ -106,6 +120,14 @@
 			$(window).load(function() {
 				$(this).joyride();
 			});
+			$(document).ready(function() {
+			  $('a.toggle').click(function(){
+			    $(this).prev().show()
+			    $('#numero3').hide();
+  				$(window).joyride();
+			    return false;
+			  })
+			})
 		</script>
 
 

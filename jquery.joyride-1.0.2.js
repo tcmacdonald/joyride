@@ -39,7 +39,8 @@
       $(options.tipContent).hide();
 
       var bodyOffset = $(options.tipContainer).children('*').first().position(),
-      tipContent = $(options.tipContent + ' li'),
+      allTipContent = $(options.tipContent + ' li'),
+      tipContent = [],
       count = skipCount = 0,
       prevCount = -1,
       timerIndicatorInstance,
@@ -59,14 +60,17 @@
           $(options.tipContainer).append(tipTemplate(tipClass, index, buttonText, self));
         }
       };
-
+      
       if(!settings.cookieMonster || !$.cookie(settings.cookieName)) {
-
-      tipContent.each(function(index) {
+        
+      allTipContent.each(function(index) {
         var buttonText = $(this).data('text'),
+        tipVisible = $('#' + $(this).data('id')).is(":visible"),
         tipClass = $(this).attr('class'),
         self = this;
-
+        
+        if(tipVisible) tipContent.push(this)
+        
         if (settings.nextButton && buttonText == undefined) {
           buttonText = 'Next';
         }
@@ -85,12 +89,13 @@
         }
         $('#joyRidePopup' + index).hide();
       });
+      
     }
 
       showNextTip = function() {
         var parentElementID = $(tipContent[count]).data('id'),
         parentElement = $('#' + parentElementID);
-
+        
         while (parentElement.offset() === null) {
           count++;
           skipCount++;
@@ -110,7 +115,7 @@
         tipOffset = 0;
 
         if (currentTip.length === 0) return;
-
+        
         if (count < tipContent.length) {
           if (settings.tipAnimation == "pop") {
             $('.joyride-timer-indicator').width(0);
